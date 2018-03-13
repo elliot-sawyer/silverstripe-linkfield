@@ -1,6 +1,6 @@
 {
   "name": "gorriecoe/silverstripe-linkfield",
-  "description": "",
+  "description": "Adds a Linkfield for gorriecoe/silverstripe-link",
   "type": "silverstripe-vendormodule",
   "license": "BSD-3-Clause",
   "authors": [
