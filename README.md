@@ -1,4 +1,4 @@
-# Silverstripe link
+# Silverstripe linkfield
 Adds a Linkfield for [gorriecoe/silverstripe-link](https://github.com/gorriecoe/silverstripe-link)
 
 ## Installation
