@@ -7,6 +7,7 @@ use SilverStripe\Forms\GridField\GridField;
 use SilverStripe\Forms\GridField\GridFieldConfig;
 use SilverStripe\Forms\GridField\GridFieldButtonRow;
 use SilverStripe\Forms\GridField\GridFieldAddNewButton;
+use SilverStripe\Forms\GridField\GridFieldEditButton;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
 use SilverStripe\Forms\GridField\GridFieldDetailForm;
@@ -89,6 +90,7 @@ class LinkField extends FormField
                         ->addComponent(new GridFieldDetailForm())
                         ->addComponent(new GridFieldDataColumns())
                         ->addComponent(new GridFieldOrderableRows('Sort'))
+                        ->addComponent(new GridFieldEditButton())
                         ->addComponent(new GridFieldDeleteAction(false))
                 )
                 ->setForm($this->Form);
