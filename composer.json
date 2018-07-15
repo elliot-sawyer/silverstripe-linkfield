@@ -21,6 +21,9 @@
     "silvershop/silverstripe-hasonefield": "^2.0"
   },
   "extra": {
-    "installer-name": "linkfield"
+    "installer-name": "linkfield",
+    "expose": [
+      "client/dist"
+    ]
   }
 }

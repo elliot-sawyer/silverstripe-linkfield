@@ -2,6 +2,7 @@
 
 namespace gorriecoe\LinkField;
 
+use SilverStripe\View\Requirements;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\CompositeField;
 use SilverStripe\Forms\LiteralField;
@@ -73,6 +74,7 @@ class LinkField extends FormField
      */
     public function Field($properties = [])
     {
+        Requirements::javascript('gorriecoe/silverstripe-linkfield: client/dist/linkfield.css');
         $field = null;
         $parent = $this->parent;
         $relationship = $parent->{$this->name}();
@@ -83,14 +85,14 @@ class LinkField extends FormField
                     LiteralField::create(
                         $this->name . 'View',
                         ($relationship->exists()) ? $relationship->Layout : ''
-                    )
+                    )->addExtraClass('linkfield__view')
                 );
                 break;
             case 'many':
                 $field = $this->getManyField();
                 break;
         }
-        $field->addExtraClass('link');
+        $field->addExtraClass('linkfield');
 
         $this->extend('updateField', $field);
         return $field;
