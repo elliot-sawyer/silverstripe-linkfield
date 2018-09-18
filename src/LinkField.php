@@ -74,7 +74,7 @@ class LinkField extends FormField
      */
     public function Field($properties = [])
     {
-        Requirements::javascript('gorriecoe/silverstripe-linkfield: client/dist/linkfield.css');
+        Requirements::css('gorriecoe/silverstripe-linkfield: client/dist/linkfield.css');
         $field = null;
         $parent = $this->parent;
         $relationship = $parent->{$this->name}();
