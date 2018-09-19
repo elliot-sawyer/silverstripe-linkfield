@@ -93,8 +93,8 @@ class LinkField extends FormField
                     $this->getHasOneField(),
                     LiteralField::create(
                         $this->name . 'View',
-                        ($relationship->exists()) ? $relationship->Layout : ''
-                    )->addExtraClass('linkfield__view')
+                        ($relationship->exists()) ? '<div class="linkfield__view">' . $relationship->Layout . '</div>' : ''
+                    )
                 );
                 break;
             case 'many':
@@ -170,7 +170,9 @@ class LinkField extends FormField
             $this->name,
             $this->title,
             $this->parent
-        )->setForm($this->Form);
+        )
+        ->setForm($this->Form)
+        ->addExtraClass('linkfield__button');
     }
 
     /**

@@ -1,10 +1,25 @@
 .linkfield{
     &__view{
-
+        padding: 1.2308rem;
+        border-top: 1px solid #dbe0e9;
+        border-bottom: 1px solid #dbe0e9;
+        width: 100%;
+    }
+    &__button{
+        padding-bottom: .76925rem;
     }
     .table{
         margin-left: 0;
         margin-right: 0;
         width: 100%;
+        min-width: 100%;
+        tbody,
+        tr.even{
+            background: transparent;
+        }
+    }
+    .toolbar--content {
+        margin: 0;
+        padding-top: 0;
     }
 }
