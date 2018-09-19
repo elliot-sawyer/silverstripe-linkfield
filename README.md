@@ -17,7 +17,7 @@ composer require gorriecoe/silverstripe-linkfield
 
 - [Gorrie Coe](https://github.com/gorriecoe)
 
-## usage
+## Usage
 
 ```php
 <?php
@@ -78,4 +78,14 @@ LinkField::create(
     'Buttons',
     $this
 )->setSortColumn('SortOrder')
+```
+
+## Belongs many many
+
+We can also add a belongs_many_many relation to the Link class. In your config.yml add the following:
+
+```yml
+gorriecoe\Link\Models\Link:
+  belongs_many_many:
+    MyCustomObject : MyCustomObject.Buttons
 ```
