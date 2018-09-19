@@ -2,6 +2,7 @@
 
 namespace gorriecoe\LinkField;
 
+use gorriecoe\Link\Models\Link;
 use SilverStripe\View\Requirements;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\CompositeField;
@@ -46,6 +47,12 @@ class LinkField extends FormField
      */
     protected $record;
 
+    /**
+     * The column to be used for sorting
+     * @var string
+     */
+    protected $sortColumn = 'Sort';
+
     public function __construct($name, $title, $parent)
     {
         parent::__construct($name, $title, null);
@@ -53,7 +60,9 @@ class LinkField extends FormField
         $this->name = $name;
         $this->title = $title;
         $this->parent = $parent;
-        $this->record = $parent->{$name}();
+        if ($this->isOneOrMany() == 'one') {
+            $this->record = $parent->{$name}();
+        }
         $this->setForm($parent->Form);
     }
 
@@ -77,9 +86,9 @@ class LinkField extends FormField
         Requirements::css('gorriecoe/silverstripe-linkfield: client/dist/linkfield.css');
         $field = null;
         $parent = $this->parent;
-        $relationship = $parent->{$this->name}();
         switch ($this->isOneOrMany()) {
             case 'one':
+                $relationship = $parent->{$this->name}();
                 $field = CompositeField::create(
                     $this->getHasOneField(),
                     LiteralField::create(
@@ -90,6 +99,19 @@ class LinkField extends FormField
                 break;
             case 'many':
                 $field = $this->getManyField();
+                break;
+            default:
+                $field = LiteralField::create(
+                    $this->name . 'Save',
+                    _t(
+                        __CLASS__ . '.PLEASESAVEOBJECTTOADDLINKS',
+                        'Please save {object} first to add {links}',
+                        [
+                            'object' => $parent->i18n_singular_name(),
+                            'links' => singleton(Link::class)->i18n_plural_name()
+                        ]
+                    )
+                );
                 break;
         }
         $field->addExtraClass('linkfield');
@@ -119,7 +141,11 @@ class LinkField extends FormField
      */
     public function isOneOrMany()
     {
-        switch ($this->parent->getRelationType($this->name)) {
+        $parent = $this->parent;
+        if (!$parent->exists()) {
+            return false;
+        }
+        switch ($parent->getRelationType($this->name)) {
             case 'has_one':
             case 'belongs_to':
                 return 'one';
@@ -152,12 +178,12 @@ class LinkField extends FormField
      */
     public function getManyField()
     {
-         $config = GridFieldConfig::create()
+        $config = GridFieldConfig::create()
             ->addComponent(new GridFieldButtonRow('before'))
             ->addComponent(new GridFieldAddNewButton('buttons-before-left'))
             ->addComponent(new GridFieldDetailForm())
             ->addComponent(new GridFieldDataColumns())
-            ->addComponent(new GridFieldOrderableRows('Sort'))
+            ->addComponent(new GridFieldOrderableRows($this->getSortColumn()))
             ->addComponent(new GridFieldEditButton())
             ->addComponent(new GridFieldDeleteAction(false));
         $config->getComponentByType(GridFieldDataColumns::class)
@@ -170,5 +196,25 @@ class LinkField extends FormField
             $this->parent->{$this->name}(),
             $config
         )->setForm($this->Form);
+    }
+
+    /**
+     * Set the column to be used for sorting
+     * @param string $sortColumn
+     * @return $this
+     */
+    public function setSortColumn($sortColumn)
+    {
+        $this->sortColumn = $sortColumn;
+        return $this;
+    }
+
+    /**
+     * Returns the column to be used for sorting
+     * @return string
+     */
+    public function getSortColumn()
+    {
+        return $this->sortColumn;
     }
 }
