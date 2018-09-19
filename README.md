@@ -11,6 +11,7 @@ composer require gorriecoe/silverstripe-linkfield
 
 - gorriecoe/silverstripe-link ^1.0
 - silvershop/silverstripe-hasonefield ^2.0
+- symbiote/silverstripe-gridfieldextensions 3.1
 
 ## Maintainers
 
@@ -65,5 +66,16 @@ class MyClass extends DataObject
         return $fields;
     }
 }
+```
 
+## Sort column
+
+By default the LinkField assumes that the sort column is named `Sort`. If you want to use another field name such as `SortOrder`, you can specify it using the `setSortColumn` method like so:
+
+```php
+LinkField::create(
+    'Buttons',
+    'Buttons',
+    $this
+)->setSortColumn('SortOrder')
 ```
