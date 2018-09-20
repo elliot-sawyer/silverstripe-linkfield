@@ -51,7 +51,13 @@ class LinkField extends FormField
      * The column to be used for sorting
      * @var string
      */
-    protected $sortColumn = 'Sort';
+    protected $sortColumn = null;
+
+    /**
+     * The column to be used for sorting
+     * @var string
+     */
+    private static $sort_column = 'Sort';
 
     public function __construct($name, $title, $parent)
     {
@@ -217,6 +223,9 @@ class LinkField extends FormField
      */
     public function getSortColumn()
     {
-        return $this->sortColumn;
+        if ($this->sortColumn) {
+            return $this->sortColumn;
+        }
+        return $this->config()->get('sort_column');
     }
 }

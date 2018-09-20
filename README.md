@@ -83,6 +83,13 @@ LinkField::create(
 )->setSortColumn('SortOrder')
 ```
 
+You can also globally define the sort column. In your config.yml add the following:
+
+```yml
+gorriecoe\LinkField\LinkField:
+  sort_column: 'SortOrder'
+```
+
 ## Belongs many many
 
 We can also add a belongs_many_many relation to the Link class. In your config.yml add the following:
