@@ -1,8 +1,9 @@
 .linkfield__view {
   padding: 1.2308rem;
-  border-top: 1px solid #dbe0e9;
-  border-bottom: 1px solid #dbe0e9;
   width: 100%;
+  border: 1px solid #dbe0e9;
+  border-radius: .23rem;
+  background: #fff;
 }
 
 .linkfield__button {
@@ -14,11 +15,18 @@
   margin-right: 0;
   width: 100%;
   min-width: 100%;
+  border: 1px solid #dbe0e9;
+  border-radius: .23rem;
+  border-collapse: initial;
+  overflow: hidden;
 }
 
-.linkfield .table tbody,
-.linkfield .table tr.even {
-  background: transparent;
+.linkfield .table tbody tr:first-child td {
+  border-top: 0;
+}
+
+.linkfield .table tbody tr:last-child td {
+  border-bottom: 0;
 }
 
 .linkfield .toolbar--content {

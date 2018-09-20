@@ -1,22 +1,29 @@
 .linkfield{
-    &__view{
+    &__view {
         padding: 1.2308rem;
-        border-top: 1px solid #dbe0e9;
-        border-bottom: 1px solid #dbe0e9;
         width: 100%;
+        border: 1px solid #dbe0e9;
+        border-radius: .23rem;
+        background: #fff;
     }
-    &__button{
+    &__button {
         padding-bottom: .76925rem;
     }
-    .table{
+    .table {
         margin-left: 0;
         margin-right: 0;
         width: 100%;
         min-width: 100%;
-        tbody,
-        tr.even{
-            background: transparent;
-        }
+        border: 1px solid #dbe0e9;
+        border-radius: .23rem;
+        border-collapse: initial;
+        overflow: hidden;
+    }
+    .table tbody tr:first-child td {
+        border-top: 0;
+    }
+    .table tbody tr:last-child td {
+        border-bottom: 0;
     }
     .toolbar--content {
         margin: 0;
