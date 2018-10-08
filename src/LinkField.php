@@ -173,9 +173,10 @@ class LinkField extends FormField
     public function getHasOneField()
     {
         return HasOneButtonField::create(
+            $this->parent,
             $this->name,
-            $this->title,
-            $this->parent
+            null,
+            $this->title
         )
         ->setForm($this->Form)
         ->addExtraClass('linkfield__button');
