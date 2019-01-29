@@ -20,6 +20,11 @@ composer require gorriecoe/silverstripe-linkfield
 
 - [Gorrie Coe](https://github.com/gorriecoe)
 
+## Screenshots
+
+![Link list](docs/_img/list.png)
+![Detail edit form](docs/_img/edit.png)
+
 ## Usage
 
 ```php
