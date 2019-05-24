@@ -19,6 +19,7 @@ composer require gorriecoe/silverstripe-linkfield
 ## Maintainers
 
 - [Gorrie Coe](https://github.com/gorriecoe)
+- [Elliot Sawyer](https://github.com/elliot-sawyer)
 
 ## Screenshots
 
