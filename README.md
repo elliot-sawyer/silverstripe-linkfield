@@ -13,7 +13,7 @@ composer require gorriecoe/silverstripe-linkfield
 ## Requirements
 
 - gorriecoe/silverstripe-link ^1.0
-- silvershop/silverstripe-hasonefield ^3.0
+- silvershop/silverstripe-hasonefield 3.0.1. [See Issue #11](https://github.com/gorriecoe/silverstripe-linkfield/issues/11#issuecomment-497077936)
 - symbiote/silverstripe-gridfieldextensions 3.1
 
 ## Maintainers
