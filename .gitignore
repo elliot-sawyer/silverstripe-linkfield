@@ -12,3 +12,4 @@ web.config
 *.sass-cache
 prepros.cfg
 node_modules
+vendor
