@@ -172,7 +172,7 @@ class LinkField extends FormField
      */
     public function getHasOneField()
     {
-        return HasOneButtonField::create(
+        $field = HasOneButtonField::create(
             $this->parent,
             $this->name,
             null,
@@ -180,6 +180,10 @@ class LinkField extends FormField
         )
         ->setForm($this->Form)
         ->addExtraClass('linkfield__button');
+
+        $this->extend('updateHasOneField', $field);
+
+        return $field;
     }
 
     /**
@@ -195,16 +199,22 @@ class LinkField extends FormField
             ->addComponent(new GridFieldOrderableRows($this->getSortColumn()))
             ->addComponent(new GridFieldEditButton())
             ->addComponent(new GridFieldDeleteAction(false));
+
         $config->getComponentByType(GridFieldDataColumns::class)
             ->setDisplayFields([
                 'Layout' => _t(__CLASS__ . '.LINK', 'Link')
             ]);
-        return GridField::create(
+
+        $field = GridField::create(
             $this->name,
             $this->title,
             $this->parent->{$this->name}(),
             $config
         )->setForm($this->Form);
+
+        $this->extend('updateManyField', $field);
+
+        return $field;
     }
 
     /**
