@@ -3,6 +3,8 @@
 namespace gorriecoe\LinkField;
 
 use gorriecoe\Link\Models\Link;
+use gorriecoe\LinkField\Forms\GridField\GridFieldLinkDetailForm;
+use gorriecoe\LinkField\Forms\HasOneLinkField;
 use SilverStripe\View\Requirements;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\CompositeField;
@@ -14,8 +16,6 @@ use SilverStripe\Forms\GridField\GridFieldAddNewButton;
 use SilverStripe\Forms\GridField\GridFieldEditButton;
 use SilverStripe\Forms\GridField\GridFieldDeleteAction;
 use SilverStripe\Forms\GridField\GridFieldDataColumns;
-use SilverStripe\Forms\GridField\GridFieldDetailForm;
-use SilverStripe\Control\HasRequestHandler;
 use SilverStripe\Control\HTTPRequest;
 use Symbiote\GridFieldExtensions\GridFieldOrderableRows;
 use SilverShop\HasOneField\HasOneButtonField;
@@ -59,13 +59,14 @@ class LinkField extends FormField
      */
     private static $sort_column = 'Sort';
 
-    public function __construct($name, $title, $parent)
+    public function __construct($name, $title, $parent, $linkConfig = array())
     {
         parent::__construct($name, $title, null);
 
         $this->name = $name;
         $this->title = $title;
         $this->parent = $parent;
+        $this->linkConfig = $linkConfig;
         if ($this->isOneOrMany() == 'one') {
             $this->record = $parent->{$name}();
         }
@@ -172,11 +173,11 @@ class LinkField extends FormField
      */
     public function getHasOneField()
     {
-        $field = HasOneButtonField::create(
+        $field = HasOneLinkField::create(
             $this->parent,
             $this->name,
-            null,
-            $this->title
+            $this->title,
+            $this->linkConfig
         )
         ->setForm($this->Form)
         ->addExtraClass('linkfield__button');
@@ -194,7 +195,7 @@ class LinkField extends FormField
         $config = GridFieldConfig::create()
             ->addComponent(new GridFieldButtonRow('before'))
             ->addComponent(new GridFieldAddNewButton('buttons-before-left'))
-            ->addComponent(new GridFieldDetailForm())
+            ->addComponent(new GridFieldLinkDetailForm($this->getLinkConfig()))
             ->addComponent(new GridFieldDataColumns())
             ->addComponent(new GridFieldOrderableRows($this->getSortColumn()))
             ->addComponent(new GridFieldEditButton())
@@ -238,5 +239,31 @@ class LinkField extends FormField
             return $this->sortColumn;
         }
         return $this->config()->get('sort_column');
+    }
+
+    /**
+     * Set the configuration for this Link relationship.
+     * @param array $linkConfig
+     * @return $this
+     */
+    public function setLinkConfig($linkConfig)
+    {
+        $this->linkConfig = $linkConfig;
+        return $this;
+    }
+
+    /**
+     * Get the configuration for this Link relationship.
+     * @return array
+     */
+    public function getLinkConfig()
+    {
+        return $this->linkConfig;
+    }
+
+    public function validate($validator)
+    {
+        $valid = $this->Field()->validate($validator);
+        return $valid;
     }
 }

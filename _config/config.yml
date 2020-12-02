@@ -1,3 +1,6 @@
 ---
 Name: linkfieldconfig
 ---
+gorriecoe\Link\Models\Link:
+  extensions:
+    - gorriecoe\LinkField\Extensions\LinkExtension
