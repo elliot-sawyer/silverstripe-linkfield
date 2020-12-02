@@ -29,6 +29,16 @@ class LinkExtension extends DataExtension
         parent::updateCMSFields($fields);
     }
 
+    public function onBeforeWrite()
+    {
+        parent::onBeforeWrite();
+
+        // re-set the Title if title fields are not editable.
+        if (!$this->shouldDisplayTitleFields()) {
+            $this->resetTitle();
+        }
+    }
+
     /**
      * Only display the link types as defined by the owner's configuration.
      * @param array $types
@@ -50,5 +60,10 @@ class LinkExtension extends DataExtension
     {
         $linkSpecs = $this->owner->link_requirements;
         return !isset($linkSpecs['title_display']) || $linkSpecs['title_display'];
+    }
+
+    protected function resetTitle()
+    {
+        $this->owner->Title = null;
     }
 }
