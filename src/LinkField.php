@@ -3,6 +3,7 @@
 namespace gorriecoe\LinkField;
 
 use gorriecoe\Link\Models\Link;
+use SilverStripe\ORM\DataObjectInterface;
 use SilverStripe\View\Requirements;
 use SilverStripe\Forms\FormField;
 use SilverStripe\Forms\CompositeField;
@@ -238,5 +239,27 @@ class LinkField extends FormField
             return $this->sortColumn;
         }
         return $this->config()->get('sort_column');
+    }
+
+    /**
+     * We need this field to be considered a data field for request handing
+     * purposes, so we want to leave {@see FormField::hasData()} in tact,
+     * but we do not want to submit data
+     *
+     * @return bool
+     */
+    public function canSubmitValue()
+    {
+        return false;
+    }
+
+    /**
+     * This field acts as a container, so should not save data into the record
+     *
+     * @param DataObjectInterface $record
+     */
+    public function saveInto(DataObjectInterface $record)
+    {
+        // noop
     }
 }
