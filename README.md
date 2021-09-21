@@ -75,6 +75,61 @@ class MyClass extends DataObject
 }
 ```
 
+### Configuration
+
+By default all link types allowed in the Link model are displayed in the edit form, but this can be configured per-field, allowing multiple configurations without requiring multiple otherwise-identical Link model subclasses.
+
+The Title field can also be hidden, which is useful if you intend on using the URL for a link but not the user-configured Title.
+
+This configuration can be passed into the constructor, or set later using the `LinkField::setLinkConfig()` method.
+
+#### Declare only which link types _are_ allowed.
+```php
+// Allow only SiteTree and URL types, implicitly allow displaying title field.
+$linkConfig = [
+    'types' => [
+        'SiteTree',
+        'URL',
+    ],
+];
+LinkField::create('FieldName', 'Field Title', $this, $linkConfig);
+```
+
+#### Explicitly declare whether each type of link is allowed or not.
+```php
+// Allow only SiteTree and URL types.
+$linkConfig = [
+    'types' => [
+        'SiteTree' => TRUE,
+        'URL' => TRUE,
+        'Email' => FALSE,
+        'Phone' => FALSE,
+        'File' => FALSE,
+    ],
+];
+LinkField::create('FieldName', 'Field Title', $this, $linkConfig);
+```
+
+#### Hide the Title field
+```php
+$linkConfig = [
+    'title_display' => false,
+];
+LinkField::create('FieldName', 'Field Title', $this, $linkConfig);
+```
+
+#### Setting the configuration later
+```php
+$linkField = LinkField::create('FieldName', 'Field Title', $this);
+$linkConfig = [
+    'types' => [
+        'SiteTree',
+        'URL',
+    ],
+];
+$linkField->setLinkConfig($linkConfig);
+```
+
 ## Sort column
 
 By default the LinkField assumes that the sort column is named `Sort`. If you want to use another field name such as `SortOrder`, you can specify it using the `setSortColumn` method like so:
