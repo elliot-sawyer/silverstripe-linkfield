@@ -92,7 +92,7 @@ $linkConfig = [
         'URL',
     ],
 ];
-LinkField::create($this, 'FieldName', 'Field Title', $linkConfig);
+LinkField::create('FieldName', 'Field Title', $this, $linkConfig);
 ```
 
 #### Explicitly declare whether each type of link is allowed or not.
@@ -107,7 +107,7 @@ $linkConfig = [
         'File' => FALSE,
     ],
 ];
-LinkField::create($this, 'FieldName', 'Field Title', $linkConfig);
+LinkField::create('FieldName', 'Field Title', $this, $linkConfig);
 ```
 
 #### Hide the Title field
@@ -115,12 +115,12 @@ LinkField::create($this, 'FieldName', 'Field Title', $linkConfig);
 $linkConfig = [
     'title_display' => false,
 ];
-LinkField::create($this, 'FieldName', 'Field Title', $linkConfig);
+LinkField::create('FieldName', 'Field Title', $this, $linkConfig);
 ```
 
 #### Setting the configuration later
 ```php
-$linkField = LinkField::create($this, 'FieldName');
+$linkField = LinkField::create('FieldName', 'Field Title', $this);
 $linkConfig = [
     'types' => [
         'SiteTree',
