@@ -81,7 +81,7 @@ By default all link types allowed in the Link model are displayed in the edit fo
 
 The Title field can also be hidden, which is useful if you intend on using the URL for a link but not the user-configured Title.
 
-This configuration can be passed into the constructor, or set later using the `` method.
+This configuration can be passed into the constructor, or set later using the `LinkField::setLinkConfig()` method.
 
 #### Declare only which link types _are_ allowed.
 ```php
