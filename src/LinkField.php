@@ -38,6 +38,11 @@ class LinkField extends FormField
     protected $title;
 
     /**
+     * @var array $linkConfig
+     */
+    protected $linkConfig;
+
+    /**
      * @var DataObject $parent
      */
     protected $parent;
