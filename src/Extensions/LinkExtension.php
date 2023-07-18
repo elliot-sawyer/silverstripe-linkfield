@@ -8,6 +8,8 @@ use SilverStripe\Forms\HiddenField;
 
 /**
  * Used in conjunction with LinkField, makes the types of Links available configurable.
+ *
+ * @property \gorriecoe\Link\Models\Link&\gorriecoe\LinkField\Extensions\LinkExtension $owner
  */
 class LinkExtension extends DataExtension
 {
