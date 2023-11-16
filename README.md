@@ -2,6 +2,10 @@
 
 Adds a Linkfield for [gorriecoe/silverstripe-link](https://github.com/gorriecoe/silverstripe-link)
 
+## Why is this redirected from gorriecoe/linkfield?
+
+The original maintainer of this repository has passed away. No changes are required and your module will continue to work as intended. Please see [this issue](https://github.com/elliot-sawyer/silverstripe-linkfield/issues/44) for more info.
+
 ## Installation
 Composer is the recommended way of installing SilverStripe modules.
 ```
