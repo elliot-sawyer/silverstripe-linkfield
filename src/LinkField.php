@@ -2,6 +2,7 @@
 
 namespace gorriecoe\LinkField;
 
+use SilverStripe\ORM\DataObject;
 use gorriecoe\Link\Models\Link;
 use gorriecoe\LinkField\Forms\GridField\GridFieldLinkDetailForm;
 use gorriecoe\LinkField\Forms\HasOneLinkField;
